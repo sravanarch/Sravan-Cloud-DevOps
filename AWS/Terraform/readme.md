@@ -1,4 +1,4 @@
-_Terraform Core Commands:_
+Terraform Core Commands
 
     # Initialize Terraform
     terraform init
@@ -15,8 +15,8 @@ _Terraform Core Commands:_
     # Destroy Terraform to delete all resources 
     terraform destroy
 
-_Terraform Lock File_
-    .terraform.lock.hcl
+*Terraform Lock File*
+    _.terraform.lock.hcl_
     
 *Terraform Basics*
     Terraform Configuration File or Terraform Manifest File:
