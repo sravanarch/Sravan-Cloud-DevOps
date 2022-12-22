@@ -11,14 +11,18 @@ terraform {
 
 # Provider Block
 provider "aws" {                    // name defined under required providers be used here
-  region = "us-east-1"
+  region = var.region_name
   profile = "default"
 }
 # Resources Block
 resource "aws_instance" "ec2instance" {
-  ami = "ami-0b5eea76982371e91"
-  instance_type = "t2.micro"
+#  ami = "ami-0b5eea76982371e91"
+  ami = data.aws_ami.amazon_linux2_ami.id
+#  instance_type = "t2.micro"
+  instance_type = var.instance_type
   user_data = file("${path.module}/userdata.sh")
+  key_name = var.keypair
+  vpc_security_group_ids = [ aws_security_group.allow_ssh.id, aws_security_group.allow_http_https.id ]
   tags = {
     "Name" = "ec2 demo"
   }
