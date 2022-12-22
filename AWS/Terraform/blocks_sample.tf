@@ -1,5 +1,76 @@
+/*
+TERRAFORM BASIC BLOCKS:
+  1. Terraform Block (Available from 0.13 version)
+  2. Provider Block
+  3. Resource Block
+
+  1. TERRAFORM BLOCK: 
+      - It is used to define some special behavious such as:
+        * Required Terraform Version
+        * List required providers
+        * Terraform Backend
+
+        NOTE:
+        * Terraform Block can be called in 3 ways, all means the same.
+            - Terraform block
+            - Terraform settings block
+            - Terraform configuration block
+        * Each terraform block can contain a number of settings related to "Terraform's behaviour"
+        
+        IMPORTANT NOTE:
+        * Within a terraform block, ONLY CONSTANT VALUES can be used
+        * ARGUMENTS may not refer to named objects such as RESOURCES, INPUT VARIABLES, ETC
+                    may not use any of the Terraform language built-in functions.
+        * Before 0.13 version, TERRAFORM block is defined in PROVIDER block
+
+  2. PROVIDER BLOCK:
+      - It is a heart of Terraform
+      - This block is between the AWS CLI & endpoint (AWS or Azure Cloud Provider)
+      - Terraform relies on PROVIDERS to interact with remote systems
+      - Declare PROVIDERS for Terraform to install providers & use them.
+      - PROVIDER configurations belong to ROOT Module
+
+  3. RESOURCE BLOCK:
+      - Each resource block describes one or more infrastructure objects
+      - Resource syntax to declare resources
+      - Resource behaviour to handle resource declarations
+      - We can configure resource post-creation actions
+*/
+
+/*
+DIFFERENCE BETWEEN 0.12 VS 0.13 ONWARDS
+
+0.12 OR BEFORE:
+===============
+provider "aws" {
+  version = "~>3.0"
+  region = "us-east-1"
+}
+resource "aws_vpc" "vpcsetup" {
+  cidr_block = "10.0.0.0/8"
+}
+
+0.13 ONWARDS:
+=============
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  } 
+}
+provider "aws" {
+  region = "us-east-1"
+}
+resource "aws-vpc" "vpcsetup" {
+  cidr_block = "10.0.0.0/8"
+}
+*/
+
 # 1. Terraform Settings Block
 terraform {
+  required_version = "~> 0.14.3"    // Terraform version
   required_providers {
     aws = {
       source  = "hashicorp/aws"
